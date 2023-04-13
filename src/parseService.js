@@ -1,23 +1,12 @@
 
 import Axios from "axios"
 
-export function getSynonyms() {
-    Axios.post('/parse', {})
-        .then((response) => {
-
-        })
-        .catch((error) => {
-
-        })
-}
-
-export function helloWorld() {
-    Axios.get('http://localhost:3000/', {})
-        .then((response) => {
-            console.log(response.data)
-            return response.data
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+export const getSynonyms = async (formData) => {
+    try {
+        const response = await Axios.post('http://localhost:8080/post', { formData });
+        return response.data;
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
