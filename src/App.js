@@ -8,12 +8,23 @@ export default function App() {
     const [gridVisibility, setGridVisibility] = useState(false);
     const [textValue, setTextValue] = useState('');
     const [data, setData] = useState('')
+    const [formValidation, setFormValidation] = useState(false)
+    const [validationMessage, setValidationMessage] = useState('')
 
     const handleParseClick = useCallback(async (event) => {
         event.preventDefault();
-        const response = await getSynonyms(textValue.trim());
-        setData(response)
-        setGridVisibility(true);
+        if (textValue.trim() !== '') {
+            setValidationMessage('')
+            setFormValidation(false)
+            const response = await getSynonyms(textValue.trim());
+            setData(response)
+            setGridVisibility(true);
+        }
+        else {
+            setValidationMessage('This field is required.')
+            setFormValidation(true)
+        }
+
     }, [textValue])
 
     const handleChange = useCallback((event) => {
@@ -30,7 +41,7 @@ export default function App() {
             <Box>
                 <form onSubmit={handleParseClick}>
                     <FormGroup>
-                        <TextField multiline id="text" value={textValue} onChange={handleChange} required />
+                        <TextField multiline id="text" value={textValue} onChange={handleChange} error={formValidation} helperText={validationMessage} />
                         <div className="buttonGroup">
                             <Button variant="outlined" onClick={handleClearClick}>Clear</Button>
                             <Button variant="outlined" type="submit">Parse</Button>
