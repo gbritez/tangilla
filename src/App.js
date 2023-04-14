@@ -1,4 +1,4 @@
-import { Button, FormGroup, TextField, Grow, Box } from "@mui/material";
+import { Button, FormGroup, TextField, Grow, Box, CircularProgress } from "@mui/material";
 import { React, useCallback, useState } from "react";
 import { ResultGrid } from "./ResultGrid"
 import './index.css';
@@ -7,32 +7,37 @@ import { getSynonyms } from "./parseService";
 export default function App() {
     const [gridVisibility, setGridVisibility] = useState(false);
     const [textValue, setTextValue] = useState('');
-    const [data, setData] = useState('')
-    const [formValidation, setFormValidation] = useState(false)
-    const [validationMessage, setValidationMessage] = useState('')
+    const [data, setData] = useState('');
+    const [formValidation, setFormValidation] = useState(false);
+    const [validationMessage, setValidationMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleParseClick = useCallback(async (event) => {
         event.preventDefault();
         if (textValue.trim() !== '') {
-            setValidationMessage('')
-            setFormValidation(false)
+            setIsLoading(true);
+            setValidationMessage('');
+            setFormValidation(false);
             const response = await getSynonyms(textValue.trim());
-            setData(response)
+            setData(response);
             setGridVisibility(true);
+            setIsLoading(false);
         }
         else {
             setValidationMessage('This field is required.')
-            setFormValidation(true)
+            setFormValidation(true);
         }
 
     }, [textValue])
 
     const handleChange = useCallback((event) => {
-        setTextValue(event.target.value)
+        setTextValue(event.target.value);
     }, [])
 
     const handleClearClick = useCallback(() => {
         setGridVisibility(false);
+        setValidationMessage('');
+        setFormValidation(false);
     }, [])
 
     return (
@@ -49,11 +54,18 @@ export default function App() {
                     </FormGroup>
                 </form>
             </Box>
-            <Grow in={gridVisibility}>
-                <div>
-                    <ResultGrid rows={data} />
-                </div>
-            </Grow>
+            {
+                isLoading ?
+                    <div className="progress">
+                        <CircularProgress />
+                    </div>
+                    :
+                    <Grow in={gridVisibility}>
+                        <div>
+                            <ResultGrid rows={data} />
+                        </div>
+                    </Grow>
+            }
         </>
     );
 }
