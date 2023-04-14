@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/tangilla/static/css/main.771b95cb.css",
-    "main.js": "/tangilla/static/js/main.dccc8cb5.js",
+    "main.css": "/tangilla/static/css/main.52ebdd1d.css",
+    "main.js": "/tangilla/static/js/main.ba48cee4.js",
     "index.html": "/tangilla/index.html",
-    "main.771b95cb.css.map": "/tangilla/static/css/main.771b95cb.css.map",
-    "main.dccc8cb5.js.map": "/tangilla/static/js/main.dccc8cb5.js.map"
+    "main.52ebdd1d.css.map": "/tangilla/static/css/main.52ebdd1d.css.map",
+    "main.ba48cee4.js.map": "/tangilla/static/js/main.ba48cee4.js.map"
   },
   "entrypoints": [
-    "static/css/main.771b95cb.css",
-    "static/js/main.dccc8cb5.js"
+    "static/css/main.52ebdd1d.css",
+    "static/js/main.ba48cee4.js"
   ]
 }
