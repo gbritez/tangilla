@@ -7,6 +7,6 @@ export const getSynonyms = async (text) => {
         return response.data;
     }
     catch (error) {
-        console.error("Error en el servidor: ", error);
+        console.error("Error en el servidor: ", error.toJSON());
     }
 }

@@ -7,7 +7,7 @@ import { getSynonyms } from "./parseService";
 export default function App() {
     const [gridVisibility, setGridVisibility] = useState(false);
     const [textValue, setTextValue] = useState('');
-    const [data, setData] = useState('');
+    const [data, setData] = useState([]);
     const [formValidation, setFormValidation] = useState(false);
     const [validationMessage, setValidationMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
